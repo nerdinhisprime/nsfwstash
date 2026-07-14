@@ -1,0 +1,7 @@
+{
+  "name": "api",
+  "scripts": {
+    "dev": "echo \"hello!!\" && exit 1"
+  },
+  "type": "module"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "nsfwstash",
+  "scripts": {
+    "webdev": "pnpm -F web dev --host",
+    "apidev": "pnpm -F api dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nerdinhisprime/NSFWStash.git"
+  },
+  "author": "nerdinhisprime",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nerdinhisprime/NSFWStash/issues"
+  },
+  "homepage": "https://github.com/nerdinhisprime/NSFWStash#readme",
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
+  }
+}
