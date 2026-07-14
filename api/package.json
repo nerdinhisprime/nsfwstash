@@ -1,7 +1,10 @@
 {
   "name": "api",
   "scripts": {
-    "dev": "echo \"hello!!\" && exit 1"
+    "dev": "tsx src/index.ts"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "fastify": "^5.10.0"
+  }
 }
