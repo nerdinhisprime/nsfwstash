@@ -1,1 +1,1 @@
-export { default as Main } from './ui/main.vue'
+export { default } from './ui/main.vue'

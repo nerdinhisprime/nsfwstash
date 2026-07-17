@@ -1,14 +1,29 @@
 <script setup lang="ts">
-  import { reactive } from 'vue';
+  import { ref } from 'vue';
   import { RegisterUser } from '@/entities/register-user';
 
-  const userData = reactive({
+  const userData = ref({
     userEmail: '',
     userPassword: '',
   });
+
+  const postUserData = (count: number) => {
+    console.log(count)
+    fetch(`${__API_URL__}/user/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: userData.value.userEmail,
+        password: userData.value.userPassword,
+        name: 'Eva',
+      }),
+    })
+    .then(res => res.json())
+    .then(console.log)
+    .catch(err => console.log('ERROR: ', err))
+  };
 </script>
 
 <template>
-  <RegisterUser v-model="userData" />
-  <p style="color: white"> da{{ userData.userEmail }}</p>
+  <RegisterUser v-model="userData" @submit="postUserData" />
 </template>
