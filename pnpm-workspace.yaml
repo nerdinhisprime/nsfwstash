@@ -2,4 +2,5 @@ packages:
   - web
   - api
 allowBuilds:
+  bcrypt: false
   esbuild: false

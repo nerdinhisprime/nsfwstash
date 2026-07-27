@@ -1,0 +1,23 @@
+services:
+  maindatabase:
+    build: .
+    # image: postgres:17-bookworm
+    container_name: maindatabase
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USR}
+      POSTGRES_PASSWORD: ${DB_PSWD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - main_db_data:/var/lib/postgresql/data
+      - ./api/db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USR} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
+
+volumes:
+  main_db_data:
