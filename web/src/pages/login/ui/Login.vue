@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { LogIn } from '@/features/log-in';
+import { Login } from '@/features/login';
 </script>
 
 <template>
   <main class="main center">
-    <LogIn />
+    <Login />
   </main>
 </template>
 

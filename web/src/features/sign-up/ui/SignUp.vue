@@ -7,8 +7,7 @@
     userPassword: '',
   });
 
-  const postUserData = (count: number) => {
-    console.log(count)
+  const signupUser = () => {
     fetch(`${__API_URL__}/user/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -19,11 +18,10 @@
       }),
     })
     .then(res => res.json())
-    .then(console.log)
     .catch(err => console.log('ERROR: ', err))
   };
 </script>
 
 <template>
-  <RegisterUser v-model="userData" @submit="postUserData" />
+  <RegisterUser v-model="userData" @submit="signupUser" />
 </template>

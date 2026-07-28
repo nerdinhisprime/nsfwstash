@@ -16,16 +16,15 @@ const loginUser = () => {
   })
     .then((res) => {
       if (!res.ok) throw new Error('Login error');
-      console.log(res)
+      console.log(res);
       return res.json();
     })
     .then((data) => {
-      console.log(data)
-      //if (data.token) localStorage.setItem('token', data.token);
+      if (data.token) localStorage.setItem('token', data.token);
     })
     .catch((err) => console.error('ERRROR: ', err));
 };
 </script>
 <template>
-  <RegisterUser v-model="userData" @submit="loginUser" title="Welcome back"/>
+  <RegisterUser v-model="userData" @submit="loginUser" title="Welcome back" />
 </template>
