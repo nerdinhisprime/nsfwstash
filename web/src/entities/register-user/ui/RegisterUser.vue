@@ -1,27 +1,33 @@
 <script setup lang="ts">
-  import { AppButton, AppInput } from '@/shared'
-  import { ref } from 'vue';
+import { AppButton, AppInput } from '@/shared';
+import { ref } from 'vue';
 
-  const count = ref(0)
+const count = ref(0);
 
-  const emit = defineEmits<{
-    'submit': [count: number];
-    //(e: 'submit', count: number): void;
-  }>()
+const emit = defineEmits<{
+  submit: [count: number];
+  //(e: 'submit', count: number): void;
+}>();
 
-  const model = defineModel<{
-    userEmail: string;
-    userPassword: string;
-  }>({ required: true })
+const model = defineModel<{
+  userEmail: string;
+  userPassword: string;
+}>({ required: true });
+
+defineProps({ title: String });
 </script>
 
 <template>
   <form class="register" @submit.prevent="emit('submit', count++)">
     <RouterLink to="/"><< back</RouterLink>
-    <h2>Welcome</h2>
+    <h2>{{ title || 'Welcome'}}</h2>
     <AppInput v-model="model.userEmail" type="email" placeholder="email" />
-    <AppInput v-model="model.userPassword" type="password" placeholder="password" />
-    <AppButton type="submit" style="margin-top: 30px">Create</AppButton>
+    <AppInput
+      v-model="model.userPassword"
+      type="password"
+      placeholder="password"
+    />
+    <AppButton type="submit" style="margin-top: 30px">Submit</AppButton>
   </form>
 </template>
 

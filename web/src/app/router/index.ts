@@ -1,24 +1,26 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-
-const Register = () => import('@/pages/register')
-const Main = () => import('@/pages/main')
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: Main,
+    component: () => import('@/pages/main'),
   },
   {
     path: '/signup',
     name: 'register',
-    component: Register,
+    component: () => import('@/pages/register'),
   },
-]
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/pages/login'),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-})
+});
 
-export default router
+export default router;
