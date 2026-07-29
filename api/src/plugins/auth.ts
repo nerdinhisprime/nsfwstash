@@ -4,7 +4,7 @@ import fastifyJwt from '@fastify/jwt';
 
 export default fp(async (app) => {
   app.register(fastifyJwt, {
-    secret: process.env.JSW_SECRET || 'supersecretkey231',
+    secret: process.env.JWT_SECRET || 'supersecretkey231',
     cookie: {
       cookieName: 'token',
       signed: false,
@@ -16,7 +16,7 @@ export default fp(async (app) => {
       try {
         await request.jwtVerify();
       } catch (err) {
-        reply
+        return reply
           .status(401)
           .send({ error: 'Unauthorized', message: 'This token is wrong' });
       }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { AppButton } from '@/shared';
 
-defineProps<{ buttonText?: String }>();
+defineProps<{ buttonText?: string }>();
 </script>
 
 <template>

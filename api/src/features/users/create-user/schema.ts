@@ -1,6 +1,6 @@
 import { FastifySchema } from 'fastify';
 
-export const registerUserSchema: FastifySchema = {
+export const createUserSchema: FastifySchema = {
   body: {
     type: 'object',
     required: ['email', 'password', 'name'],

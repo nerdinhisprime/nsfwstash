@@ -7,7 +7,7 @@ interface RegisterBody {
   name: string;
 }
 
-export const registerUserHandler = async (
+export const createUserHandler = async (
   request: FastifyRequest<{ Body: RegisterBody }>,
   reply: FastifyReply,
 ) => {
