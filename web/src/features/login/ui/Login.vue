@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { RegisterUser } from '@/entities/register-user';
 import { ref } from 'vue';
+
 const userData = ref({
   userEmail: '',
   userPassword: '',
 });
+
 const loginUser = () => {
   fetch(`${__API_URL__}/user/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
     body: JSON.stringify({
       email: userData.value.userEmail,
       password: userData.value.userPassword,
@@ -16,11 +19,10 @@ const loginUser = () => {
   })
     .then((res) => {
       if (!res.ok) throw new Error('Login error');
-      console.log(res);
       return res.json();
     })
-    .then((data) => {
-      if (data.token) localStorage.setItem('token', data.token);
+    .then(() => {
+      console.log('ура, победа');
     })
     .catch((err) => console.error('ERRROR: ', err));
 };

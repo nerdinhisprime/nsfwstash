@@ -23,7 +23,6 @@ defineExpose({
     "
   >
     <div @click.stop>
-      <p style="background: white">privet</p>
       <slot />
     </div>
   </dialog>

@@ -32,10 +32,20 @@ export const loginUserHandler = async (
     }
 
     const token = request.server.jwt.sign(
-      { id: user.id, email: user.email },
+      { sub: user.id, email: user.email, role: user.role || 'user' },
       { expiresIn: '1d' },
     );
-    return reply.status(200).send({ token, data: rows[0] });
+    return reply
+      .setCookie('token', token, {
+        path: '/',
+        httpOnly: true,
+        //secure: process.env.NODE_ENV === 'production',
+        secure: true, // защита от MitM, Wireshark и др. WiFi снифферов (WiFi sniffer)
+        sameSite: 'lax',
+        maxAge: 24 * 60 * 60,
+      })
+      .status(200)
+      .send({ message: ' токен в куках' });
   } catch (error) {
     request.log.error(error);
     return reply.status(500).send({ error: 'Internal Server Error' });

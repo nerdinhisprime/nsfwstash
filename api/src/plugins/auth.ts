@@ -5,6 +5,10 @@ import fastifyJwt from '@fastify/jwt';
 export default fp(async (app) => {
   app.register(fastifyJwt, {
     secret: process.env.JSW_SECRET || 'supersecretkey231',
+    cookie: {
+      cookieName: 'token',
+      signed: false,
+    },
   });
   app.decorate(
     'authenticate',

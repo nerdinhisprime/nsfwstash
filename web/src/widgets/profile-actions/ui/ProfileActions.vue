@@ -6,6 +6,5 @@
 <template>
   <AppDropDown>
     <Logout />
-    <Logout />
   </AppDropDown>
 </template>
