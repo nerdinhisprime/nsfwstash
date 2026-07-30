@@ -16,6 +16,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'login',
     component: () => import('@/pages/login'),
   },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('@/pages/profile'),
+  },
 ];
 
 const router = createRouter({
