@@ -1,9 +1,10 @@
 services:
   maindatabase:
-    build: .
-    # image: postgres:17-bookworm
-    container_name: maindatabase
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     restart: unless-stopped
+    container_name: maindatabase
     environment:
       POSTGRES_USER: ${DB_USR}
       POSTGRES_PASSWORD: ${DB_PSWD}
@@ -15,9 +16,7 @@ services:
       - ./api/db:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USR} -d ${DB_NAME}"]
-      interval: 10s
-      timeout: 5s
-      retries: 2
+      interval: 10s timeout: 5s retries: 2
 
 volumes:
   main_db_data:
