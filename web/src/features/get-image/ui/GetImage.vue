@@ -1,27 +1,30 @@
 <script setup lang="ts">
 import { AppButton, AppInput } from '@/shared';
-import { ref } from 'vue';
+import { onUnmounted, ref } from 'vue';
 
-const idImage = ref<string>('');
-const obj = ref<any>()
-const img = ref(`${__API_URL__}/image?search=40`)
+const idImg = ref<string>('');
+const imgURL = ref<string>(`${__API_URL__}/image?search=40`);
 
-var getImage = async () => {
-  var params = new URLSearchParams({
-    search: idImage.value,
-  });
-  fetch(`${__API_URL__}/image?${params}`)
-    .then(res => res.blob())
-    .then(res => {
-      img.value = URL.createObjectURL(res)
+const getImage = async () => {
+  fetch(`${__API_URL__}/image?${new URLSearchParams({ search: idImg.value })}`)
+    .then((res) => {
+      if (!res.ok) throw new Error('Loud error');
+      return res.blob();
     })
+    .then((res) => {
+      if (imgURL.value.startsWith('blob:')) URL.revokeObjectURL(imgURL.value);
+      imgURL.value = URL.createObjectURL(res);
+    });
 };
+onUnmounted(() => {
+  if (imgURL.value.startsWith('blob: ')) URL.revokeObjectURL(imgURL.value);
+});
 </script>
 
 <template>
   <div>
-    <img :src="img" width="400"/>
-    <AppInput v-model="idImage" />
+    <img :src="imgURL" width="400" />
+    <AppInput v-model="idImg" />
     <AppButton @click="getImage">get</AppButton>
   </div>
 </template>
