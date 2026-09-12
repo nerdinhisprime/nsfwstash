@@ -21,22 +21,19 @@ server {
     proxy_set_header X-Forwarded-Proto $scheme;
   }
 
-  # замени /api/static/ на /media/original!!!
-  location /api/static/ {
+  location /media/image/ {
     alias ${IMG_PATH}/;
 
     expires 30d;
     add_header Cache-Control "public, no-transform";
     add_header Access-Control-Allow-Origin *;
   }
-  location /media/original/ {
-    alias ${IMG_PATH}/;
+  location /media/video/ {
+    alias ${VIDEO_PATH}/;
 
-    expires 30d;
     add_header Cache-Control "public, no-transform";
     add_header Access-Control-Allow-Origin *;
   }
-
   location /media/preview/ {
     alias ${PREVIEW_PATH}/;
 

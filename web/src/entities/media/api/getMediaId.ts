@@ -5,7 +5,8 @@ export const getMediaId = async (id: number | string) => {
   if (!res.ok) return null;
   const data = await res.json();
   return {
-    previewUrl: data.previewUrl ?? data.preview_url,
-    originalUrl: data.originalUrl ?? data.original_url,
+    previewUrl: data.previewUrl,
+    originalUrl: data.originalUrl,
+    mediaType: data.mediaType,
   };
 };

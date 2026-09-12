@@ -7,6 +7,7 @@ interface MediaList {
   id: number;
   originalUrl: string;
   previewUrl: string;
+  mediaType: 'image' | 'video';
 }
 
 const targetEl = ref<HTMLElement | null>(null);
@@ -36,6 +37,7 @@ ioFn(targetEl, fn);
         state: {
           previewUrl: item.previewUrl,
           originalUrl: item.originalUrl,
+          mediaType: item.mediaType,
         },
       }"
     >

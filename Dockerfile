@@ -8,6 +8,7 @@ FROM base AS deps
 COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
 COPY api/package.json ./api/
 COPY web/package.json ./web/
+RUN apt update && apt upgrade -y && apt install ffmpeg -y
 RUN pnpm i --frozen-lockfile
 
 FROM deps AS dev

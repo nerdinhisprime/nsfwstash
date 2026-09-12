@@ -2,35 +2,65 @@
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { getMediaId } from '@/entities/media';
+import { AppButton } from '@/shared';
+
+interface URLStrings {
+  previewUrl: string;
+  originalUrl: string;
+  mediaType: 'image' | 'video';
+}
 
 const { id } = useRoute().params;
-const previewUrl = ref('');
-const originalUrl = ref('');
+const urls = ref<URLStrings>();
+const mediaUrl = ref<string | undefined>();
+const mediaType = ref<'image' | 'video'>();
+
+const showOriginalImg = () => {
+  if (history.state.originalUrl && history.state.mediaType) {
+    mediaUrl.value = history.state.originalUrl;
+    mediaType.value = history.state.mediaType;
+  } else {
+    mediaUrl.value = urls.value?.originalUrl;
+    mediaType.value = urls.value?.mediaType;
+  }
+};
 
 onMounted(async () => {
-  if (history.state.previewUrl && history.state.originalUrl) {
-    previewUrl.value = history.state.previewUrl;
-    originalUrl.value = history.state.originalUrl;
+  if (history.state.originalUrl && history.state.mediaType) {
+    mediaUrl.value = history.state.previewUrl;
+    mediaType.value = history.state.mediaType;
   } else {
-    const res = await getMediaId(Number(id));
-    console.log(res)
-    if (res) {
-      previewUrl.value = res.previewUrl;
-      originalUrl.value = res.originalUrl;
+    urls.value = (await getMediaId(Number(id))) as URLStrings;
+
+    if (urls.value) {
+      mediaType.value = urls.value.mediaType;
+      if (mediaType.value === 'video') {
+        mediaUrl.value = urls.value.originalUrl;
+      } else {
+        mediaUrl.value = urls.value.previewUrl;
+      }
     }
-    console.log(previewUrl.value)
   }
 });
 </script>
 <template>
-  <div>
-    <img :src="`${previewUrl}`" class="image" />
-    <img :src="`${originalUrl}`" class="image" />
+  <div class="img-container">
+    <AppButton v-if="mediaType === 'image'" @click="showOriginalImg">
+      <img :src="mediaUrl" class="image" />
+    </AppButton>
+    <video v-else-if="mediaType === 'video'" controls width="600">
+      <source :src="mediaUrl" />
+    </video>
   </div>
 </template>
 
 <style scoped>
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .image {
-  height: 90vh;
+  max-width: 90%;
 }
 </style>
