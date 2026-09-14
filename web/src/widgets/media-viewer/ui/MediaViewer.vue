@@ -51,6 +51,7 @@ onMounted(async () => {
     <video v-else-if="mediaType === 'video'" controls width="600">
       <source :src="mediaUrl" />
     </video>
+    <p v-else>error loading content:(</p>
   </div>
 </template>
 
@@ -64,3 +65,4 @@ onMounted(async () => {
   max-width: 90%;
 }
 </style>
+

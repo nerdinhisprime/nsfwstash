@@ -7,9 +7,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/pages/main'),
   },
   {
-    path: '/image/:id',
-    name: 'image-detail',
-    component: () => import('@/pages/image-detail'),
+    path: '/media/:id',
+    name: 'media-details',
+    component: () => import('@/pages/media-details'),
   },
 ];
 

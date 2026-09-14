@@ -71,8 +71,9 @@ export default async function mediaRoute(app: FastifyInstance) {
       'image/jpeg',
       'image/png',
       'image/webp',
+      'image/avif',
       'video/mp4',
-      'video/webm',
+      'image/webp',
     ];
 
     if (!ALLOWED_MIME.includes(data.mimetype)) {

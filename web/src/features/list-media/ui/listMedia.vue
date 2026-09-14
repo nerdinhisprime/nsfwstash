@@ -32,7 +32,7 @@ ioFn(targetEl, fn);
       v-for="item in list"
       :key="item.id"
       :to="{
-        name: 'image-detail',
+        name: 'media-details',
         params: { id: item.id },
         state: {
           previewUrl: item.previewUrl,

@@ -1,11 +1,18 @@
 import type { Ref } from 'vue';
 import { API_HOSTNAME } from '@/shared';
 
-export const uploadMedia = async (file: Ref<File | undefined>) => {
+export const uploadMedia = async (
+  file: Ref<File | undefined>,
+  customFileName?: string | undefined,
+) => {
   if (!file.value) return;
 
   const formData = new FormData();
-  formData.append('file', file.value);
+  if (customFileName) {
+    formData.append('file', file.value, customFileName);
+  } else {
+    formData.append('file', file.value);
+  }
   const res = await fetch(`${API_HOSTNAME}/media/upload-single`, {
     method: 'POST',
     body: formData,
